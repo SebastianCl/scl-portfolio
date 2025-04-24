@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse px-lg-3" id="navbarCollapse">
             <div class="navbar-nav m-auto py-0">
                 <a href="#home" class="nav-item nav-link active">Inicio</a>
-                <a href="#about" class="nav-item nav-link">Sobre mi</a>
+                <a href="#about" class="nav-item nav-link">Sobre mí</a>
                 <a href="#expericence-education" class="nav-item nav-link">Recorrido</a>
                 <a href="#skill" class="nav-item nav-link">Habilidades</a>
                 <a href="#projects" class="nav-item nav-link">Proyectos</a>
@@ -56,8 +56,11 @@
 
 
     <!-- Header Start -->
-    <div class="container-fluid position-relative" id="home" style="min-height: 100vh; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">
-        <div class="container">
+    <div class="container-fluid bg-primary d-flex align-items-center mb-5 py-5" id="home" style="min-height: 100vh; position: relative; overflow: hidden;">
+        <!-- Three.js Canvas -->
+        <canvas id="bg-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></canvas>
+        <!-- Container needs relative positioning and z-index to be above canvas -->
+        <div class="container" style="position: relative; z-index: 1;">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6 text-center text-lg-left mb-5 mb-lg-0">
                     <h1 class="display-3 text-white font-weight-bold mb-3">Sebastian Cardona Loaiza</h1>
@@ -84,10 +87,6 @@
                 </div>
             </div>
         </div>
-        <div class="header-social-links">
-            <a href="https://github.com/SebastianCl" target="_blank" class="github"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/sebastiancardonaloaiza/" target="_blank" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-        </div>
         <div class="scroll-down">
             <a href="#about" class="smooth-scroll">
                 <span></span>
@@ -102,7 +101,7 @@
     <div class="container-fluid py-5" id="about">
         <div class="container">
             <div class="section-title mb-5">
-                <h2 class="text-center">Sobre Mí</h2>
+                <h2 class="text-center">Sobre mí</h2>
                 <p class="text-center lead">Conoce un poco más sobre quién soy y mi perfil profesional</p>
             </div>
             <div class="row align-items-center">
@@ -277,7 +276,7 @@
     <div class="container-fluid py-5" id="skill">
         <div class="container">
             <div class="section-title mb-5">
-                <h2 class="text-center">Mis Habilidades</h2>
+                <h2 class="text-center">Habilidades</h2>
                 <p class="text-center lead">Tecnologías y herramientas que domino</p>
             </div>
             <div class="row">
@@ -532,7 +531,7 @@
                     <div class="skill-box shadow-sm">
                         <div class="skill-header">
                             <i class="fas fa-tools skill-icon"></i>
-                            <h4 class="font-weight-bold">Otras Habilidades</h4>
+                            <h4 class="font-weight-bold">Otras habilidades</h4>
                         </div>
                         <div class="skill-body">
                             <div class="row">
@@ -557,7 +556,7 @@
                                 <div class="col-md-4 mb-3">
                                     <div class="other-skill">
                                         <i class="fas fa-code-branch"></i>
-                                        <span>Control de Versiones</span>
+                                        <span>GitFlow</span>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -612,11 +611,11 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="project-card shadow">
                         <div class="project-img-container">
-                            <div class="project-img bg-primary">
+                            <div class="project-img bg-primary p-1">
                                 <i class="fab fa-whatsapp fa-3x text-white"></i>
                             </div>
                         </div>
-                        <div class="project-body">
+                        <div class="project-body p-3">
                             <h4 class="font-weight-bold">Chatbot WhatsApp con IA</h4>
                             <p class="text-muted">Desarrollo de un bot inteligente para WhatsApp que gestiona interacciones de clientes (consultas, compras) usando la API oficial y un LLM.</p>
                             <div class="tech-stack mb-3">
@@ -633,11 +632,11 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="project-card shadow">
                         <div class="project-img-container">
-                            <div class="project-img bg-primary">
+                            <div class="project-img bg-primary p-1">
                                 <i class="fas fa-chart-line fa-3x text-white"></i>
                             </div>
                         </div>
-                        <div class="project-body">
+                        <div class="project-body p-3">
                             <h4 class="font-weight-bold">Gestor de Fondos</h4>
                             <p class="text-muted">Aplicación full-stack para simular y gestionar inversiones personales en fondos, con infraestructura definida como código en AWS.</p>
                             <div class="tech-stack mb-3">
@@ -659,11 +658,11 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="project-card shadow">
                         <div class="project-img-container">
-                            <div class="project-img bg-primary">
+                            <div class="project-img bg-primary p-1">
                                 <i class="fas fa-boxes fa-3x text-white"></i>
                             </div>
                         </div>
-                        <div class="project-body">
+                        <div class="project-body p-3">
                             <h4 class="font-weight-bold">Gestión de Inventario y Ventas</h4>
                             <p class="text-muted">Solución completa para la administración de inventario, clientes, ventas y generación de facturas, desplegada en GCP.</p>
                             <div class="tech-stack mb-3">
@@ -684,11 +683,11 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="project-card shadow">
                         <div class="project-img-container">
-                            <div class="project-img bg-primary">
+                            <div class="project-img bg-primary p-1">
                                 <i class="fas fa-user-shield fa-3x text-white"></i>
                             </div>
                         </div>
-                        <div class="project-body">
+                        <div class="project-body p-3">
                             <h4 class="font-weight-bold">Reconocimiento Facial</h4>
                             <p class="text-muted">Inspirado en Face ID de Apple, desarrollé mi propio sistema de reconocimiento facial utilizando EmguCV en .NET. Obtuvo el tercer puesto en la semana de la ingeniería de mi universidad.</p>
                             <div class="date-badge mb-2">
@@ -709,11 +708,11 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="project-card shadow">
                         <div class="project-img-container">
-                            <div class="project-img bg-primary">
+                            <div class="project-img bg-primary p-1">
                                 <i class="fas fa-satellite fa-3x text-white"></i>
                             </div>
                         </div>
-                        <div class="project-body">
+                        <div class="project-body p-3">
                             <h4 class="font-weight-bold">Comunicación con Satélite</h4>
                             <p class="text-muted">Construcción de una antena terrestre para recibir datos de telemetría (temperatura, GPS y giroscopio) de un satélite, utilizando una tarjeta LILYGO TTGO LoRa32 con firmware personalizado.</p>
                             <div class="date-badge mb-2">
@@ -732,11 +731,11 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="project-card shadow">
                         <div class="project-img-container">
-                            <div class="project-img bg-primary">
+                            <div class="project-img bg-primary p-1">
                                 <i class="fas fa-seedling fa-3x text-white"></i>
                             </div>
                         </div>
-                        <div class="project-body">
+                        <div class="project-body p-3">
                             <h4 class="font-weight-bold">Sistema de Riego Automático</h4>
                             <p class="text-muted">Sistema que utiliza un sensor de humedad y una bomba controlados con Arduino. Activa automáticamente el riego por goteo cuando detecta un bajo nivel de humedad, evitando encharcamientos.</p>
                             <div class="date-badge mb-2">
@@ -863,6 +862,76 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Three.js Background Animation Script -->
+    <script>
+        // Ensure Three.js is loaded
+        if (typeof THREE !== 'undefined') {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector('#bg-canvas'),
+                alpha: true // Transparent background
+            });
+
+            // Adjust renderer settings for the container
+            const container = document.getElementById('home');
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Geometry (Torus Knot)
+            const geometry = new THREE.TorusKnotGeometry(1.5, 0.4, 100, 16);
+            // Material (Slightly transparent, responsive to light)
+            const material = new THREE.MeshStandardMaterial({
+                color: 0xffffff, // White color
+                metalness: 0.5,
+                roughness: 0.6,
+                transparent: true,
+                opacity: 0.6 // Adjust for subtlety
+            });
+            const torusKnot = new THREE.Mesh(geometry, material);
+            scene.add(torusKnot);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); // Soft white light
+            scene.add(ambientLight);
+            const pointLight = new THREE.PointLight(0xffffff, 0.8); // Stronger point light
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+
+            camera.position.z = 5;
+
+            // Animation Loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Rotation
+                torusKnot.rotation.x += 0.003;
+                torusKnot.rotation.y += 0.003;
+
+                renderer.render(scene, camera);
+            }
+
+            // Handle Window Resize
+            function onWindowResize() {
+                const newWidth = container.clientWidth;
+                const newHeight = container.clientHeight;
+
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+            }
+            window.addEventListener('resize', onWindowResize, false);
+
+            // Start animation
+            animate();
+        } else {
+            console.error('Three.js library not loaded.');
+        }
+    </script>
 
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
