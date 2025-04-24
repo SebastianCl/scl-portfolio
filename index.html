@@ -56,11 +56,8 @@
 
 
     <!-- Header Start -->
-    <div class="container-fluid bg-primary d-flex align-items-center mb-5 py-5" id="home" style="min-height: 100vh; position: relative; overflow: hidden;">
-        <!-- Three.js Canvas -->
-        <canvas id="bg-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></canvas>
-        <!-- Container needs relative positioning and z-index to be above canvas -->
-        <div class="container" style="position: relative; z-index: 1;">
+    <div class="container-fluid position-relative" id="home" style="min-height: 100vh; background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">
+        <div class="container">
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6 text-center text-lg-left mb-5 mb-lg-0">
                     <h1 class="display-3 text-white font-weight-bold mb-3">Sebastian Cardona Loaiza</h1>
@@ -105,10 +102,8 @@
                 <p class="text-center lead">Conoce un poco más sobre quién soy y mi perfil profesional</p>
             </div>
             <div class="row align-items-center">
-                <div class="col-lg-5 mb-5 mb-lg-0">
-                    <div class="about-img">
-                        <img class="img-fluid rounded-lg shadow-lg" src="img/about.webp" alt="Sebastian Cardona Loaiza">
-                    </div>
+                <div class="col-lg-5 pb-4 pb-lg-0" id="about-canvas-container">
+                    <canvas id="about-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
                 </div>
                 <div class="col-lg-7 pl-lg-5">
                     <h3 class="font-weight-bold mb-4">Desarrollador Full Stack y DevOps</h3>
@@ -871,63 +866,77 @@
         // Ensure Three.js is loaded
         if (typeof THREE !== 'undefined') {
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            // Ajustar FOV para el nuevo espacio? (Opcional, mantener 75 por ahora)
+            const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // Aspect ratio inicial (se actualizará)
             const renderer = new THREE.WebGLRenderer({
-                canvas: document.querySelector('#bg-canvas'),
-                alpha: true // Transparent background
+                canvas: document.querySelector('#about-canvas'), // Selector actualizado
+                alpha: true // Mantener fondo transparente
             });
 
-            // Adjust renderer settings for the container
-            const container = document.getElementById('home');
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            // Contenedor actualizado
+            const container = document.getElementById('about-canvas-container');
 
-            // Geometry (Torus Knot)
-            const geometry = new THREE.TorusKnotGeometry(1.5, 0.4, 100, 16);
-            // Material (Slightly transparent, responsive to light)
+            // Función para configurar tamaño y aspecto inicial y en resize
+            function setupRendererAndCamera() {
+                 if (!container) return;
+                const width = container.clientWidth;
+                // Intentar obtener una altura razonable, o usar un ratio si es 0
+                let height = container.clientHeight > 0 ? container.clientHeight : width * 0.8; // Ratio 4:5 aprox si la altura no está definida
+
+                // Forzar una altura mínima si es necesario? Opcional.
+                if (height < 200) height = 200; // Ejemplo altura minima
+
+                renderer.setSize(width, height);
+                renderer.setPixelRatio(window.devicePixelRatio);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            }
+
+            setupRendererAndCamera(); // Configuración inicial
+
+            // Geometría (Aumentar tamaño)
+            const geometry = new THREE.TorusKnotGeometry(1.0, 0.3, 100, 16); // Aumentado radio de 0.8 a 1.0 y tubo de 0.25 a 0.3
+            // Material (Color azulado, menos transparente)
             const material = new THREE.MeshStandardMaterial({
-                color: 0xffffff, // White color
-                metalness: 0.5,
-                roughness: 0.6,
+                color: 0x5577AA, // Un color azul/grisáceo
+                metalness: 0.4,
+                roughness: 0.5,
                 transparent: true,
-                opacity: 0.6 // Adjust for subtlety
+                opacity: 0.85
             });
             const torusKnot = new THREE.Mesh(geometry, material);
             scene.add(torusKnot);
 
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); // Soft white light
+            // Iluminación (Puede requerir ajuste)
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
             scene.add(ambientLight);
-            const pointLight = new THREE.PointLight(0xffffff, 0.8); // Stronger point light
-            pointLight.position.set(5, 5, 5);
+            const pointLight = new THREE.PointLight(0xffffff, 0.7);
+            pointLight.position.set(3, 4, 5);
             scene.add(pointLight);
 
-            camera.position.z = 5;
+            camera.position.z = 3; // Cámara más cerca
 
-            // Animation Loop
+            // Animation Loop (Igual)
             function animate() {
                 requestAnimationFrame(animate);
-
-                // Rotation
-                torusKnot.rotation.x += 0.003;
-                torusKnot.rotation.y += 0.003;
-
+                torusKnot.rotation.x += 0.004;
+                torusKnot.rotation.y += 0.004;
                 renderer.render(scene, camera);
             }
 
-            // Handle Window Resize
+            // Handle Window Resize (Usa la función actualizada)
             function onWindowResize() {
-                const newWidth = container.clientWidth;
-                const newHeight = container.clientHeight;
-
-                camera.aspect = newWidth / newHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(newWidth, newHeight);
+                 setupRendererAndCamera();
             }
             window.addEventListener('resize', onWindowResize, false);
 
-            // Start animation
-            animate();
+             // Asegurarse que el contenedor existe antes de animar
+            if (container) {
+                animate();
+            } else {
+                 console.error('Three.js container #about-canvas-container not found.');
+            }
+
         } else {
             console.error('Three.js library not loaded.');
         }
